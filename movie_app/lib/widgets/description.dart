@@ -97,14 +97,13 @@ class Description extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                         children : [
                           ElevatedButton(onPressed: (){
-                            provider.toggleFavorite(Movie(name: name, description: description, bannerUrl: bannerUrl, posterUrl: posterUrl, vote: vote, launchOn: launchOn));
+                            provider.addMovieToWishlist(Movie(name: name, description: description, bannerUrl: bannerUrl, posterUrl: posterUrl, vote: vote, launchOn: launchOn, id: ''));
                             ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                                 content: Text(
                                     "Your Item was added")));
                           },
                               style: ElevatedButton.styleFrom(
-                                padding: const EdgeInsets.all(15.0),
-                                primary: Colors.red,
+                                padding: const EdgeInsets.all(15.0), backgroundColor: Colors.red,
                                 fixedSize: Size(
                                   MediaQuery.of(context).size.width * 0.425,
                                   50,

@@ -7,13 +7,19 @@ import 'package:movie_app/widgets/toprated.dart';
 import 'package:movie_app/widgets/tv.dart';
 import 'package:movie_app/widgets/trending.dart';
 import 'package:tmdb_api/tmdb_api.dart';
-
-void main() => runApp(MyApp());
+import 'package:firebase_core/firebase_core.dart';
+import 'package:movie_app/widgets/widget_tree.dart';
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
+
       providers: [
         ChangeNotifierProvider(create: (_) => WishListProvider()),
       ],
@@ -23,7 +29,10 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
             brightness: Brightness.dark, primaryColor: Colors.green),
       ),
+
+
     );
+
   }
 }
 
@@ -71,6 +80,18 @@ class _HomeState extends State<Home> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.account_box),
+            tooltip: 'Open shopping cart',
+            onPressed: () {
+              final route = MaterialPageRoute(
+                builder: (context) => const WidgetTree(),
+              );
+              Navigator.push(context, route);
+            },
+          ),
+        ],
         title: modifieldText(
           text: 'Flutter MovieApp',
           color: Colors.white,
@@ -79,6 +100,7 @@ class _HomeState extends State<Home> {
       ),
       body: Stack( // Wrap the content in a Stack
         children: [
+
           ListView(
             children: [
               // Your existing list items go here
