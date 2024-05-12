@@ -13,12 +13,16 @@ class FavoritePage extends StatelessWidget {
       future: Provider.of<WishListProvider>(context).getWishlist(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return CircularProgressIndicator();
+          return Container(
+            height: 4,
+            width: 100,
+            child: CircularProgressIndicator(),
+          );
         } else if (snapshot.hasError) {
           return Text('Error: ${snapshot.error}');
         } else {
           final List<Movie> movies = snapshot.data!;
-          final provider = Provider.of<WishListProvider>(context, listen: false); // Define provider here
+          final provider = Provider.of<WishListProvider>(context, listen: false);
           return Scaffold(
             appBar: AppBar(
               title: Text("My favorite"),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app/widgets/movie_search.dart';
 import 'package:movie_app/widgets/wishlist.dart';
 import 'package:provider/provider.dart';
 import 'package:movie_app/provider/wishlist_provider.dart';
@@ -82,7 +83,7 @@ class _HomeState extends State<Home> {
         backgroundColor: Colors.transparent,
         actions: [
           IconButton(
-            icon: const Icon(Icons.account_box),
+            icon: const Icon(Icons.account_box, size: 30,),
             tooltip: 'Open shopping cart',
             onPressed: () {
               final route = MaterialPageRoute(
@@ -91,6 +92,11 @@ class _HomeState extends State<Home> {
               Navigator.push(context, route);
             },
           ),
+          IconButton(onPressed: () {
+            final route = MaterialPageRoute(builder: (context) => MovieSearchScreen(),
+            );
+            Navigator.push(context, route);
+          }, icon: const Icon(Icons.search, size: 30,))
         ],
         title: modifieldText(
           text: 'Flutter MovieApp',
